@@ -162,12 +162,11 @@
     (dolist (buffer (buffer-list))
       (with-current-buffer buffer
         (if (and (eq major-mode current-buffer-major-mode) fira-code-symbol-mode)
-            ;; (turn-off-fira-code-symbol-mode)
             (fira-code-symbol-mode -1)
           )
           )))
   (remove-fira-code-symbol-from-major-mode)
-  )
+  (remove-hook 'prog-mode-hook 'fira-code-symbol-hook))
 
 (defun enable-fira-code-symbol-in-major-mode ()
   "enable in all buffers opened in current major mode & add hook to current major mode "
@@ -176,11 +175,10 @@
     (dolist (buffer (buffer-list))
       (with-current-buffer buffer
         (if (and (eq major-mode current-buffer-major-mode) (not (eq fira-code-symbol-mode 1)))
-            ;; (turn-on-fira-code-symbol-mode)
             (fira-code-symbol-mode 1)
           )
         )))
-  (add-fira-code-symbol-from-major-mode)
-  )
+  (add-fira-code-symbol-from-major-mode))
+
 
 (provide 'fira-code-symbol)
