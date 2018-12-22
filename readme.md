@@ -1,17 +1,16 @@
 # Fira Code Symbol Mode
 
-If you are a [Fira Code](https://github.com/tonsky/FiraCode) fan, you probably want to use it's beautiful Fira Code Symbols in coding as well. This can be done with Fira Code Symbol minor mode.
+If you are a [FiraCode](https://github.com/tonsky/FiraCode) fan, you probably want to use its beautiful Symbols in coding as well. This can be done with Fira Code Symbol minor mode.
 
 ![demo](./demo/demo.gif)
 
 Fira Code Symbols can help your code more readable.
 
-##Prerequisite
+## Prerequisite
 
 install [Fira Code Symbol font](https://github.com/tonsky/FiraCode/files/412440/FiraCode-Regular-Symbol.zip) made by [@siegebell](https://github.com/siegebell)
 
 ---
-
 
 ## Install
 
@@ -19,7 +18,7 @@ install [Fira Code Symbol font](https://github.com/tonsky/FiraCode/files/412440/
 (require 'fira-code-symbol)
 ~~~
 
-put `fira-code-symbol.el` into  your load-path & add above line intro you init.el
+put `fira-code-symbol.el` into  your load-path & add the above code in your init.el file
 
 ---
 
@@ -28,6 +27,7 @@ put `fira-code-symbol.el` into  your load-path & add above line intro you init.e
 ~~~scheme
 M-x fira-code-symbol-mode
 ~~~
+
 enable / disable Fira Code Symbol minor mode in current buffer
 
 ---
@@ -38,7 +38,7 @@ enable / disable Fira Code Symbol minor mode in current buffer
 (add-hook 'python-mode-hook 'fira-code-symbol-hook)
 ~~~
 
-the above code will enable  Fira Code Symbol minor mode in python major mode automatically
+enable Fira Code Symbol minor mode in python major mode automatically
 
 ---
 
@@ -47,21 +47,23 @@ the above code will enable  Fira Code Symbol minor mode in python major mode aut
 ~~~scheme
 M-x enable-fira-code-symbol-in-major-mode
 ~~~
-enable Fira Code Symbol minor mode in all buffers opened in current major mode & add hook to current major mode
+enable Fira Code Symbol minor mode in all buffers opened in current major mode & add hook to the current major mode's hook
 
 ---
 
 ## Disable Fira Code Symbol in current Major Mode
 
-~~~
+~~~scheme
 M-x disable-fira-code-symbol-in-major-mode
 ~~~
-disable Fira Code Symbol minor mode in all buffers opened in current major mode & remove hook to current major mode
+disable Fira Code Symbol minor mode in all buffers opened in current major mode & remove hook from the current major mode's hook  
+You should know that this function will remove fira-code-symbol-hook from `prog-mode-hook`(if it has) as a side effect
 
+---
 
 ## Global Fira Code Symbol (not recommended)
 
-~~~emacs
+~~~scheme
 (global-fira-code-symbol-mode 1)
 ~~~
 
