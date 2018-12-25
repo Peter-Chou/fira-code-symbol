@@ -1,3 +1,37 @@
+;;; fira-code-symbol.el --- makes FiraCode Symbols work in emacs -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2018 by Peter Chou, all rights reserved.
+
+;; Author: Peter Chou <2747244153@qq.com>
+;; URL: https://github.com/Peter-Chou/fira-code-symbol
+;; Version: 0.1
+;; Package-Requires: ((emacs "24.4"))
+;; Keywords: FiraCode, faces
+
+;;; This file is NOT part of GNU Emacs
+
+;;; License
+;;
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 3, or (at your option)
+;; any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program; see the file COPYING.  If not, write to
+;; the Free Software Foundation, Inc., 51 Franklin Street, Fifth
+;; Floor, Boston, MA 02110-1301, USA.
+
+;;; Code:
+
+(when (package-installed-p 'prettify-greek)
+  (require 'prettify-greek))
+
 ;;; inspired from https://github.com/tonsky/FiraCode/issues/211#issuecomment-239058632
 ;; This works when using emacs --daemon + emacsclient
 (add-hook 'after-make-frame-functions (lambda (frame) (set-fontset-font t '(#Xe100 . #Xe16f) "Fira Code Symbol")))
@@ -123,7 +157,9 @@
 
 (defun turn-on-fira-code-symbol-mode ()
   "Enable Fira Code ligatures in current buffer."
-  (setq-local fira-code-symbol-mode--old-prettify-alist prettify-symbols-alist)
+  (if (featurep 'prettify-greek)
+      (setq-local fira-code-symbol-mode--old-prettify-alist (append prettify-greek-lower prettify-greek-upper prettify-symbols-alist))
+    (setq-local fira-code-symbol-mode--old-prettify-alist prettify-symbols-alist))
   (setq-local prettify-symbols-alist (append fira-code-symbol-font-lock-keywords-alist fira-code-symbol-mode--old-prettify-alist))
   (prettify-symbols-mode 1))
 
@@ -162,9 +198,7 @@
     (dolist (buffer (buffer-list))
       (with-current-buffer buffer
         (if (and (eq major-mode current-buffer-major-mode) fira-code-symbol-mode)
-            (fira-code-symbol-mode -1)
-          )
-          )))
+            (fira-code-symbol-mode -1)))))
   (remove-fira-code-symbol-from-major-mode)
   (remove-hook 'prog-mode-hook 'fira-code-symbol-hook))
 
@@ -175,9 +209,7 @@
     (dolist (buffer (buffer-list))
       (with-current-buffer buffer
         (if (and (eq major-mode current-buffer-major-mode) (not (eq fira-code-symbol-mode 1)))
-            (fira-code-symbol-mode 1)
-          )
-        )))
+            (fira-code-symbol-mode 1)))))
   (add-fira-code-symbol-from-major-mode))
 
 
