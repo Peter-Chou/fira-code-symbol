@@ -1,6 +1,6 @@
 ;;; fira-code-symbol.el --- makes FiraCode Symbols work in emacs -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2018 by Peter Chou, all rights reserved.
+;; Copyright (C) 2018-2019 by Peter Chou, all rights reserved.
 
 ;; Author: Peter Chou <2747244153@qq.com>
 ;; URL: https://github.com/Peter-Chou/fira-code-symbol
